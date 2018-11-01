@@ -109,7 +109,7 @@ class ArticleController extends Controller
             
             $article = Article::findOrFail($id);
 
-            $article->tags()->sync(['tag_id' => $request->tag_id]);
+            $article->tags()->sync($request->tag_id);
 
             Session::flash('updated_article', 'The article ' . $article->title . ' has been updated');
         }

@@ -32,12 +32,14 @@
                 <div class="uk-form-row">
                     <div class="uk-form-controls uk-form-controls-text">
                         <input type="checkbox" value="{{ $tag->id }}" name="tag_id[]">
-                        <label
-                                for="{{$tag->id}}">{{$tag->name}}</label>
+                        <label for="{{$tag->id}}">{{$tag->name}}</label>
                     </div>
                 </div>
             @endforeach
 		  </div>
+		  @if($errors->has('tag_id'))
+		    	{{$errors->first('tag_id')}}
+		    @endif
 		  {!! Form::submit('Create Article', ['class' => 'btn btn-primary', 'name' => 'submit']) !!}
 		{!! Form::close() !!}
 	</div>

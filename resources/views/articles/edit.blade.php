@@ -27,15 +27,21 @@
 		    @endif
 		  </div>
 		  <div class="form-group {{$errors->has('tag_id') ? 'has-error' : '' }}">
-		    {!! Form::label('tag_id', 'Tag:', ['for' => 'tag_id']) !!}
-		    @foreach($article->tags as $tag)
-		    {!! Form::select('tag_id', ['' => $tag->name] + $tags, null, ['class' => 'form-control', 'name' => 'tag_id']) !!}
-		    @endforeach
-		    @if($errors->has('tag_id'))
+			@foreach($tags as $tag)
+                <div class="uk-form-row">
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <input type="checkbox" value="{{ $tag->id }}" name="tag_id[]">
+                        <label for="{{$tag->id}}">{{$tag->name}}</label>
+                    </div>
+                </div>
+            @endforeach
+		  </div>
+		  @if($errors->has('tag_id'))
 		    	{{$errors->first('tag_id')}}
 		    @endif
+		  <div>
+		  	{!! Form::submit('Update Article', ['class' => 'btn btn-primary col-md-4', 'name' => 'submit']) !!}
 		  </div>
-		  {!! Form::submit('Update Article', ['class' => 'btn btn-primary col-md-4', 'name' => 'submit']) !!}
 		{!! Form::close() !!}
 
 		{!! Form::open(['method' => 'DELETE', 'action' => ['ArticleController@destroy', $article->id]]) !!}
