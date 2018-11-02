@@ -27,15 +27,25 @@
 		    @endif
 		  </div>
 		  <div class="form-group {{$errors->has('tag_id') ? 'has-error' : '' }}">
+				<?php
+					$tag_ids = $article->tags;
+					$tags_id = [];
+					foreach($tag_ids as $key => $value){
+						$tags_id[] =  $value->pivot->tag_id;
+					}
+				?>
 			@foreach($tags as $tag)
-                <div class="uk-form-row">
-                    <div class="uk-form-controls uk-form-controls-text">
-                        <input type="checkbox" value="{{ $tag->id }}" name="tag_id[]">
-                        <label for="{{$tag->id}}">{{$tag->name}}</label>
-                    </div>
+            <div class="uk-form-row">
+                <div class="uk-form-controls uk-form-controls-text">
+                    <input type="checkbox" value="{{ $tag->id }}" name="tag_id[]" {{ in_array($tag->id,$tags_id) ? 'checked':'' }} />
+                    <label for="{{$tag->id}}">{{$tag->name}}</label>
                 </div>
-            @endforeach
+            </div>
+       		@endforeach
 		  </div>
+		  @if($errors->has('tag_id'))
+		    	{{$errors->first('tag_id')}}
+		    @endif
 		  @if($errors->has('tag_id'))
 		    	{{$errors->first('tag_id')}}
 		    @endif
