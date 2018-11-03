@@ -56,7 +56,7 @@
 				      	@endif
 				      </td>
 				      <td>
-				      	@if($article->is_published == 1)
+				    @if($article->is_published == 1)
 						<!--<form action="/posts" method="post">-->
 						{!! Form::open(['method' => 'PATCH', 'action' => ['ArticleController@approve', $article->id]]) !!}
 							<input type="hidden" name="is_published" value="0">
@@ -79,7 +79,13 @@
 						  <!--<button type="submit" name="submit" class="btn btn-primary">Create</button>-->
 						{!! Form::close() !!}
 					</td>
-					<td><a type="button" href="{{route('articles.show', $article->id)}}" class="btn btn-warning btn-sm">View Article</a></td>
+					<td>
+						@if($article->is_published == 1)
+							<a type="button" href="{{route('articles.show', $article->id)}}" class="btn btn-warning btn-sm">View Article</a>
+						@else
+							<p class="text-center">Publish the aricle to view its comments</p>
+						@endif	
+						</td>
 				    </tr>
 			  	@endforeach
 		  	@endif

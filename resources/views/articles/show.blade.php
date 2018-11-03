@@ -13,8 +13,10 @@
         <h1>{{$article->title}}</h1> by <a href="#">{{$article->user->name}}</a> <span class="glyphicon glyphicon-time"></span> Posted on {{$article->created_at ? $article->created_at->toDayDateTimeString() : 'No date'}}</p>
         <hr>
         <!-- Article Content -->
+        <h4>Summary:</h4>
         <p class="lead">{{$article->summary}}</p>
         <hr>
+        <h4>Content:</h4>
         <p class="lead">{{$article->content}}</p>
         <hr>
         <!-- Article Comments -->

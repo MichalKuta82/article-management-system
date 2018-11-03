@@ -67,9 +67,15 @@ class ArticleController extends Controller
         //
         $article = Article::findOrFail($id);
 
-        $comments = $article->comments()->get();
+        if($article->is_published == 1){
 
-        return view('articles.show', compact('article', 'comments'));
+            $comments = $article->comments()->get();
+
+            return view('articles.show', compact('article', 'comments'));
+        }else{
+
+            return redirect('/articles');
+        }
     }
 
     /**
